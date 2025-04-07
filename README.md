@@ -1,4 +1,4 @@
-# 🔧 SmartFix — Book Local Services Online
+# 🔧 SmartFix — Smart Utility System
 
 SmartFix is a modern web application for scheduling household services like electricians, plumbers, cleaners, and more — all from the comfort of your browser.
 
