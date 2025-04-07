@@ -130,7 +130,11 @@ const BusinessBookedSlot = async(businessId,date)=>{
 const GetUserBookingHistory = async(userEmail)=>{
   const query = gql`
   query GetUserBookingHistory {
-  bookings(where: {userEmail: "`+userEmail+`"}, orderBy: date_ASC) {
+  bookings(
+    where: {userEmail: "`+userEmail+`"}
+    orderBy: date_ASC
+    first: 30
+  ) {
     businessList {
       name
       images {
