@@ -54,6 +54,7 @@ function Header() {
                         <DropdownMenuContent>
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <hr className="border-t-2 border-gray-300 my-4"/>
+                            <DropdownMenuItem className="cursor-pointer"><Link href='/myProfile'>My Profile</Link></DropdownMenuItem>
                             <DropdownMenuItem className="cursor-pointer"><Link href='/myBooking'>My Bookings</Link></DropdownMenuItem>
                             <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
