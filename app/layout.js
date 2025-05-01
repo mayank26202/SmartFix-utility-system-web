@@ -1,4 +1,4 @@
-"use client"; // Add this directive at the top to make this a client component
+"use client";
 
 import { Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
@@ -8,8 +8,8 @@ import { Toaster } from "@/components/ui/sonner";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "./_components/Footer";
-import { usePathname } from "next/navigation"; // Now allowed, because we're in a client component
-
+import { usePathname } from "next/navigation";
+import { metadata } from "./metadata";
 const inter = Outfit({
   subsets: ["latin"],
 });
@@ -26,14 +26,19 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Dynamically setting the title and description */}
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href={metadata.icons.icon} />
+      </head>
       <body className={inter.className}>
         <NextAuthSessionProvider>
           <div className="mx-6 md:mx-16">
-            {/* Conditionally render Header */}
             {!hideHeaderFooter && <Header />}
             <Toaster />
             {children}
-            {/* Conditionally render Footer */}
             {!hideHeaderFooter && <Footer />}
           </div>
         </NextAuthSessionProvider>
