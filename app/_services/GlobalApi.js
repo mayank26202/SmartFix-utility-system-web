@@ -86,6 +86,37 @@ const getBussinesById = async (id) => {
   return await request(MASTER_URL, query);
 };
 
+const getBussinesByEmail = async (email) => {
+  const query = gql`
+    query GetBusinessById {
+      businessList(where: {email: "${email}"}) {
+    email
+    about
+    address
+    bookings {
+      date
+      id
+      time
+      userEmail
+      userName
+    }
+    category {
+      name
+    }
+    contactPerson
+    id
+    name
+    images {
+      url
+    }
+  }
+    }
+  `;
+  return await request(MASTER_URL, query);
+};
+
+
+
 const createNewBooking = async (businessId, date, time, userEmail, userName) => {
   const mutationQuery = gql`
     mutation MyMutation {
@@ -222,7 +253,7 @@ const createOrUpdateProfile = async (email, name, phoneNumber, address, pincode)
 const getProfile = async (email) => {
   const query = gql`
     query MyQuery {
-  profile(where: {email: "`+email+`"}) {
+  profile(where: {email: "`+ email + `"}) {
     name
     phoneNumber
     pincode
@@ -245,5 +276,7 @@ export default {
   GetUserBookingHistory,
   GetSliders,
   createOrUpdateProfile,
-  getProfile // Added new function for fetching profile
+  getProfile,
+  getBussinesByEmail
+
 };

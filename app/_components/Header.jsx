@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from 'next/link'
 
-
 function Header() {
 
     const { data } = useSession();
@@ -53,19 +52,28 @@ function Header() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <hr className="border-t-2 border-gray-300 my-4"/>
+                            <hr className="border-t-2 border-gray-300 my-4" />
                             <DropdownMenuItem className="cursor-pointer"><Link href='/myProfile'>My Profile</Link></DropdownMenuItem>
                             <DropdownMenuItem className="cursor-pointer"><Link href='/myBooking'>My Bookings</Link></DropdownMenuItem>
                             <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                     : (
-                        <Button
-                            onClick={() => signIn('descope')}
-                            className="bg-[#087cfb] text-white font-medium px-4 py-2 rounded-full shadow-lg hover:bg-[#0462c9] transition-all cursor-pointer"
-                        >
-                            Login / Signup
-                        </Button>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button className="bg-[#087cfb] text-white font-medium px-4 py-2 rounded-full shadow-lg hover:bg-[#0462c9] transition-all cursor-pointer">
+                                    Login / Signup
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuItem onClick={() => signIn('descope')}>
+                                    Continue as User
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <Link href="/provider-auth">Continue as Provider</Link>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     )}
             </div>
 

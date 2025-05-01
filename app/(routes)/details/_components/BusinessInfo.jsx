@@ -19,7 +19,7 @@ function BusinessInfo({ business }) {
                     <h2 className='flex gap-2 text-lg text-gray-500'><MapPin />{business?.address}</h2>
                     <h2 className='flex gap-2 text-lg text-gray-500'><Mail />{business?.email}</h2>
                     <h2 className=" pl-9 text-sm font-semibold text-gray-800">
-                    <span className="text-black  mr-2">₹249</span>
+                    <span className="text-black  mr-2">Starts at: <span className='text-green-600'>₹249</span>  </span>
                     <span className="text-gray-500 font-bold mr-2">.</span>
                     <span className="text-gray-500 font-bold">60 mins</span>
                 </h2>

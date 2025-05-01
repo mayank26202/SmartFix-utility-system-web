@@ -18,6 +18,7 @@ export const authOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
+          roles : profile.roles
         };
       },
     },
@@ -35,6 +36,7 @@ export const authOptions = {
             name: profile?.name,
             email: profile?.email,
             image: profile?.picture,
+            roles: profile?.roles
           },
         };
       } else if (Date.now() < token.expires_at * 1000) {
