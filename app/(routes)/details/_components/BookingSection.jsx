@@ -149,7 +149,7 @@ function BookingSection({ children, business }) {
       prefill: {
         name: data?.user?.name || '',
         email: data?.user?.email || '',
-        contact: '9999999999', // ✅ FIXED: dummy contact number
+        contact: '9999999999',
       },
       notes: {
         service: business.name,
