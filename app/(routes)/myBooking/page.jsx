@@ -23,20 +23,31 @@ function MyBooking() {
 
 
   const filterData = (type) => {
-    const result = bookingHistory.filter(item =>
-      type === 'booked'
-        ? new Date(item.date) >= new Date()
-        : new Date(item.date) < new Date()
-    );
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize today's date
+  
+    const result = bookingHistory.filter(item => {
+      const bookingDate = new Date(item.date);
+      bookingDate.setHours(0, 0, 0, 0); // Normalize booking date
+  
+      if (type === 'booked') {
+        return bookingDate >= today; // Today or future
+      } else if (type === 'completed') {
+        return bookingDate < today; // Strictly before today
+      }
+    });
   
     if (type === 'completed') {
-      result.sort((a, b) => new Date(b.date) - new Date(a.date));
+      result.sort((a, b) => new Date(b.date) - new Date(a.date)); // Newest first
     } else if (type === 'booked') {
-      result.sort((a, b) => new Date(a.date) - new Date(b.date));
+      result.sort((a, b) => new Date(a.date) - new Date(b.date)); // Oldest first
     }
   
     return result;
   };
+  
+  
+  
   
 
   return (
