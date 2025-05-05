@@ -20,7 +20,7 @@ import { ChevronDown } from 'lucide-react';
 
 const ORIGINAL_PRICE = 499;
 const DISCOUNTED_PRICE = 249;
-const GST_RATE = 0.18; // 18% GST
+const GST_RATE = 0.18;
 
 function BookingSection({ children, business }) {
   const [date, setDate] = useState(new Date());
@@ -117,6 +117,54 @@ function BookingSection({ children, business }) {
     setShowDropdown(false);
   };
 
+  const loadRazorpayScript = () => {
+    return new Promise(resolve => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleRazorpayPayment = async () => {
+    const res = await loadRazorpayScript();
+    if (!res) {
+      toast('Razorpay SDK failed to load');
+      return;
+    }
+
+    const { basePrice, gst, total } = calculatePriceDetails();
+
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount: Number(total) * 100,
+      currency: 'INR',
+      name: 'SmartFix Services',
+      description: 'Service Booking',
+      handler: function (response) {
+        toast.success('Payment Successful');
+        saveBooking();
+      },
+      prefill: {
+        name: data?.user?.name || '',
+        email: data?.user?.email || '',
+        contact: '9999999999', // ✅ FIXED: dummy contact number
+      },
+      notes: {
+        service: business.name,
+        date: moment(date).format('DD MMM YYYY'),
+        time: selectedTime,
+      },
+      theme: {
+        color: '#087cfb',
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   const { basePrice, gst, total } = calculatePriceDetails();
 
   return (
@@ -137,8 +185,6 @@ function BookingSection({ children, business }) {
       >
         <SheetTrigger asChild>{children}</SheetTrigger>
         <SheetContent className="p-5 bg-white overflow-auto w-full sm:max-w-5xl">
-
-
           {!showSummary ? (
             <>
               <SheetHeader>
@@ -146,7 +192,6 @@ function BookingSection({ children, business }) {
                 <SheetDescription className="text-xl">
                   Select Date and Time slot to book a service
                 </SheetDescription>
-
               </SheetHeader>
 
               <h2 className="font-bold text-[#087cfb]">Select Date</h2>
@@ -203,19 +248,11 @@ function BookingSection({ children, business }) {
             </>
           ) : (
             <div className="mt-5">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Booking Summary
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Booking Summary</h3>
 
-              <p>
-                <strong>Service:</strong> <span className='text-[#087cfb]'>{business.name}</span>
-              </p>
-              <p>
-                <strong>Date:</strong> <span>{moment(date).format('DD MMM YYYY')}</span>
-              </p>
-              <p>
-                <strong>Time:</strong> <span>{selectedTime}</span>
-              </p>
+              <p><strong>Service:</strong> <span className="text-[#087cfb]">{business.name}</span></p>
+              <p><strong>Date:</strong> {moment(date).format('DD MMM YYYY')}</p>
+              <p><strong>Time:</strong> {selectedTime}</p>
 
               <div className="mt-4">
                 <p className="font-semibold mb-2">Apply Coupons:</p>
@@ -225,26 +262,20 @@ function BookingSection({ children, business }) {
                     className="flex justify-between w-full"
                     onClick={() => setShowDropdown(!showDropdown)}
                   >
-                    {coupons.length > 0
-                      ? coupons.join(', ')
-                      : 'Select Coupon(s)'}
+                    {coupons.length > 0 ? coupons.join(', ') : 'Select Coupon(s)'}
                     <ChevronDown size={18} />
                   </Button>
 
                   {showDropdown && (
                     <div className="absolute z-10 mt-2 w-full bg-white border rounded-md shadow-lg">
                       <div
-                        className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${coupons.includes('NEWUSER50') && 'bg-blue-50'
-                          }`}
+                        className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${coupons.includes('NEWUSER50') && 'bg-blue-50'}`}
                         onClick={() => handleCouponToggle('NEWUSER50')}
                       >
                         <strong>NEWUSER50:</strong> 50% off for first-time booking
                       </div>
                       <div
-                        className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${coupons.includes('TODAYSPECIAL10') && 'bg-blue-50'
-                          } ${!moment(date).isSame(new Date(), 'day') &&
-                          'text-gray-400 cursor-not-allowed'
-                          }`}
+                        className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${coupons.includes('TODAYSPECIAL10') && 'bg-blue-50'} ${!moment(date).isSame(new Date(), 'day') && 'text-gray-400 cursor-not-allowed'}`}
                         onClick={() => {
                           if (moment(date).isSame(new Date(), 'day')) {
                             handleCouponToggle('TODAYSPECIAL10');
@@ -279,8 +310,8 @@ function BookingSection({ children, business }) {
 
               <div className="mt-6 flex gap-4">
                 <Button
-                  className={`bg-[#087cfb] text-white hover:bg-[#0663d2] w-full`}
-                  onClick={saveBooking}
+                  className="bg-[#087cfb] text-white hover:bg-[#0663d2] w-full"
+                  onClick={handleRazorpayPayment}
                 >
                   Book Service
                 </Button>
