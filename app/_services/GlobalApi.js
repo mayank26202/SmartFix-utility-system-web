@@ -265,6 +265,127 @@ const getProfile = async (email) => {
   return await request(MASTER_URL, query);
 };
 
+// const createReview = async (rating, reviewText, userEmail, userName, businessId) => {
+//   const mutationQuery = gql`
+//     mutation CreateReview {
+//   createReview(
+//     data: {rating: `+rating+`, reviewText: "`+reviewText+`", userEmail: "`+userEmail+`", userName: "`+userName+`", businessList: {connect: {id: "`+businessId+`"}}}
+//   ) {
+//     id
+//     rating
+//     reviewText
+//     userEmail
+//     userName
+//     businessList {
+//       id
+//     }
+//   }
+//   publishManyReviews(to: PUBLISHED) {
+//     count
+//   }
+// }
+//   `;
+
+//   return await request(MASTER_URL, mutationQuery);
+// };
+
+const createReview = async (rating, reviewText, userEmail, userName, businessId, date) => {
+  const mutationQuery = gql`
+    mutation CreateReview {
+      createReview(
+        data: {
+          rating: ${rating},
+          reviewText: "${reviewText}",
+          userEmail: "${userEmail}",
+          userName: "${userName}",
+          date: "${date}",
+          businessList: { connect: { id: "${businessId}" } }
+        }
+      ) {
+        id
+        rating
+        reviewText
+        userEmail
+        userName
+        date
+        businessList {
+          id
+        }
+      }
+      publishManyReviews(to: PUBLISHED) {
+        count
+      }
+    }
+  `;
+  return await request(MASTER_URL, mutationQuery);
+};
+
+
+// const getReviewsByBusiness = async (businessId) => {
+//   const query = gql`
+//     query {
+//       reviews(where: { businessList: { id: "${businessId}" } }, orderBy: createdAt_DESC) {
+//         rating
+//         reviewText
+//         userEmail
+//         userName
+//         createdAt
+//       }
+//     }
+//   `;
+//   return await request(MASTER_URL, query);
+// };
+
+// const getReviews = async (businessId) => {
+//   const query = `
+//     query {
+//       reviews(where: { businessList: { id: "${businessId}" } }, orderBy: createdAt_DESC) {
+//         id
+//         rating
+//         reviewText
+//         userEmail
+//         userName
+//         createdAt
+//       }
+//     }
+//   `;
+//   return await request(MASTER_URL, query);
+// };
+
+const getReviewsByBusiness = async (businessId) => {
+  const query = gql`
+    query {
+      reviews(where: { businessList: { id: "${businessId}" } }, orderBy: createdAt_DESC) {
+        id
+        rating
+        reviewText
+        userEmail
+        userName
+        date
+      }
+    }
+  `;
+  return await request(MASTER_URL, query);
+};
+
+// GET ALL REVIEWS
+const getReviews = async (businessId) => {
+  const query = gql`
+    query {
+      reviews(where: { businessList: { id: "${businessId}" } }, orderBy: createdAt_DESC) {
+        id
+        rating
+        reviewText
+        userEmail
+        userName
+        date
+      }
+    }
+  `;
+  return await request(MASTER_URL, query);
+};
+
+
 
 export default {
   getCategory,
@@ -277,6 +398,9 @@ export default {
   GetSliders,
   createOrUpdateProfile,
   getProfile,
-  getBussinesByEmail
+  getBussinesByEmail,
+  createReview,
+  getReviewsByBusiness,
+  getReviews
 
 };
