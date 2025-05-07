@@ -9,9 +9,9 @@ export default function Footer() {
         
         {/* Logo & Tagline */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-2 mb-4">
             <Image src="/logo.svg" alt="SmartFix Logo" width={40} height={40} />
-            <h1 className="text-2xl font-bold">SmartFix</h1>
+            <h1 className="text-2xl font-bold text-[#087cfb] tracking-wide font-sans">SmartFix</h1>
           </div>
           <p className="text-sm text-black">
             Trusted Utility Booking Platform. Seamless service scheduling for your everyday needs.

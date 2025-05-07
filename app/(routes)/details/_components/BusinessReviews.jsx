@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 const BusinessReviews = ({ businessId }) => {
   const [reviews, setReviews] = useState([]);
-  const [userRating, setUserRating] = useState(0);
+  const [userRating, setUserRating] = useState(1);
   const [userReview, setUserReview] = useState('');
   const [loading, setLoading] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -35,7 +35,7 @@ const BusinessReviews = ({ businessId }) => {
     setLoading(true);
     const { name, email } = session.user;
 
-    // Format date as YYYY-MM-DD
+    
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
 
@@ -71,7 +71,7 @@ const BusinessReviews = ({ businessId }) => {
             <Star
               key={i}
               onClick={() => setUserRating(i)}
-              className={`cursor-pointer w-6 h-6 ${i <= userRating ? 'text-yellow-400' : 'text-gray-800'}`}
+              className={`cursor-pointer w-6 h-6 ${i <= userRating ? 'text-yellow-400' : 'text-[#087cfb]'}`}
               fill={i <= userRating ? 'currentColor' : 'none'}
             />
           ))}

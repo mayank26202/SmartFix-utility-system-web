@@ -1,5 +1,45 @@
 @import "tailwindcss";
 
+/* Add custom scroll animation */
+/* Add this to your global CSS file */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.carousel-item {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Add this to your global CSS file */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);  /* Adjust to match half the total width of the entire block */
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;  /* Slow down the scrolling speed */
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .animate-scroll {
+    animation: scroll 60s linear infinite;  /* Even slower for mobile view */
+  }
+}
+
+
+
+
+
 :root {
 }
 

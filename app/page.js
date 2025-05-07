@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import BusinessList from "./_components/BusinessList";
 import Slider from "./_components/Slider";
 import Footer from "./_components/Footer";
+import TestimonialsCarousel from "./_components/TestimonialsCarousel";
 
 export default function Home() {
   const [categoryList, setCategoryList] = useState([]);
@@ -40,10 +41,11 @@ export default function Home() {
 
   return (
     <div>
-      <Hero />
+      <Hero businessList={businessList}/>
       <CategoryList categoryList={categoryList} />
       <Slider/>
       <BusinessList businessList={businessList} title={'Popular Services'}/>
+      <TestimonialsCarousel/>
       {/* <Footer /> */}
     </div>
   );
