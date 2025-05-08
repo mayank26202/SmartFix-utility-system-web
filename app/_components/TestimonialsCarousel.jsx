@@ -35,16 +35,17 @@ const testimonials = [
 
 export default function TestimonialsCarousel() {
   return (
-    <div className="mt-10 bg-[#e2eefc]  py-10 overflow-hidden">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+    <div className="mt-10 bg-[#e2eefc] py-10 overflow-hidden relative">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800">
         What Our Clients Say
       </h2>
-      <div className="relative w-full overflow-hidden">
-        <div className="flex animate-scroll gap-6 w-max">
+
+      <div className="relative w-full h-[150px]">
+        <div className="absolute flex gap-6 animate-scroll w-max px-4">
           {[...testimonials, ...testimonials].map((item, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-xl p-5 w-80 flex-shrink-0"
+              className="bg-white shadow-md rounded-xl p-4 sm:p-5 w-72 sm:w-80 flex-shrink-0"
             >
               <p className="text-gray-700 text-sm mb-4 break-words">
                 {item.text}

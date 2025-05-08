@@ -5,16 +5,7 @@ export async function middleware(req) {
   const url = req.nextUrl.clone();
   const pathname = url.pathname;
 
-  // ✅ Admin protection via cookie
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    const isAdmin = req.cookies.get('next_admin')?.value === 'true';
-    if (!isAdmin) {
-      url.pathname = '/admin/login';
-      return NextResponse.redirect(url);
-    }
-  }
-
-  // ✅ Provider protection via NextAuth
+  // ✅ Provider protection via NextAuth (not touched)
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
   if (pathname.startsWith('/provider')) {
@@ -24,13 +15,30 @@ export async function middleware(req) {
     }
   }
 
-  // ✅ User protection via NextAuth
+  // ✅ User protection via NextAuth (not touched)
   if (pathname.startsWith('/user')) {
     if (!token || token?.profile?.role !== 'user') {
       url.pathname = '/';
       return NextResponse.redirect(url);
     }
   }
+
+  if (pathname.startsWith('/admin')) {
+    const cookie = req.headers.get('cookie') || ''
+    const sessionExists = cookie.includes('adminSession=true')
+  
+    // Prevent flashing /admin content
+    if (!sessionExists && pathname === '/admin') {
+      url.pathname = '/admin/login'
+      return NextResponse.redirect(url)
+    }
+  
+    if (!sessionExists && pathname.startsWith('/admin')) {
+      url.pathname = '/admin/login'
+      return NextResponse.redirect(url)
+    }
+  }
+  
 
   return NextResponse.next();
 }
@@ -39,6 +47,6 @@ export const config = {
   matcher: [
     '/provider/:path*',
     '/user/:path*',
-    '/admin((?!/login).*)', // protects all /admin except /admin/login
+    '/admin/:path*',
   ],
 };

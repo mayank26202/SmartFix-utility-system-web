@@ -13,8 +13,8 @@ function CategoryList({ categoryList }) {
               href={`/search/${category.name}`}
               key={index}
               className="flex flex-col items-center justify-center gap-2
-              bg-[#e2eefc] p-5 rounded-lg cursor-pointer 
-              hover:scale-110 transition-all ease-in-out hover:text-[#087cfb] hover:shadow-md border-b-3 border-gray-200 hover:border-[#087cfb]"
+              bg-[#e2eefc] p-5 cursor-pointer rounded-2xl
+              hover:scale-110 transition-all ease-in-out hover:text-[#087cfb] hover:shadow-md border-b-3 border-gray-200 hover:border-[#087cfb] shadow-lg"
               // style={{ backgroundColor: category.bgcolor?.hex }}
             >
               <Image

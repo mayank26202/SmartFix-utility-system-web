@@ -72,89 +72,49 @@ const MyProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#e2eefc] p-6">
-      <div className="max-w-5xl mx-auto bg-white p-8 rounded-lg shadow-xl">
-        <div className="flex flex-col md:flex-row items-start space-x-0 md:space-x-6 mb-8">
-          <div className="w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-0">
+    <div className="min-h-screen bg-[#e2eefc] p-4 sm:p-6">
+      <div className="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-xl">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8 mb-8">
+          <div className="w-24 h-24 sm:w-32 sm:h-32">
             <img
               src={session?.user?.image || "/default_profile.jpg"}
               alt="Profile"
               className="w-full h-full rounded-full object-cover border-4 border-[#087cfb] shadow-md"
             />
           </div>
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block mb-2 text-sm font-semibold text-gray-700">Name</label>
-              {editing ? (
-                <input
-                  type="text"
-                  name="name"
-                  value={profile.name}
-                  onChange={handleInputChange}
-                  className="w-full border border-[#087cfb] rounded-lg p-2 bg-[#e2eefc] hover:bg-white focus:bg-white transition"
-                  placeholder="Enter your name"
-                />
-              ) : (
-                <p className="p-2 bg-[#e2eefc] rounded">{profile.name || "Your Name"}</p>
-              )}
-            </div>
-  
-            <div>
-              <label className="block mb-2 text-sm font-semibold text-gray-700">Phone Number</label>
-              {editing ? (
-                <input
-                  type="text"
-                  name="phone"
-                  value={profile.phone}
-                  onChange={handleInputChange}
-                  className="w-full border border-[#087cfb] rounded-lg p-2 bg-[#e2eefc] hover:bg-white focus:bg-white transition"
-                  placeholder="+91 1234567890"
-                />
-              ) : (
-                <p className="p-2 bg-[#e2eefc] rounded">{profile.phone || "Phone Number"}</p>
-              )}
-            </div>
-  
-            <div>
-              <label className="block mb-2 text-sm font-semibold text-gray-700">Address</label>
-              {editing ? (
-                <input
-                  type="text"
-                  name="address"
-                  value={profile.address}
-                  onChange={handleInputChange}
-                  className="w-full border border-[#087cfb] rounded-lg p-2 bg-[#e2eefc] hover:bg-white focus:bg-white transition"
-                  placeholder="Enter your address"
-                />
-              ) : (
-                <p className="p-2 bg-[#e2eefc] rounded">{profile.address || "Address"}</p>
-              )}
-            </div>
-  
-            <div>
-              <label className="block mb-2 text-sm font-semibold text-gray-700">Pincode</label>
-              {editing ? (
-                <input
-                  type="text"
-                  name="pincode"
-                  value={profile.pincode}
-                  onChange={handleInputChange}
-                  className="w-full border border-[#087cfb] rounded-lg p-2 bg-[#e2eefc] hover:bg-white focus:bg-white transition"
-                  placeholder="Pincode"
-                />
-              ) : (
-                <p className="p-2 bg-[#e2eefc] rounded">{profile.pincode || "Pincode"}</p>
-              )}
-            </div>
-  
-            <div className="md:col-span-1 cursor-not-allowed">
-              <label className="block mb-2 text-sm font-semibold text-gray-700">Email</label>
-              <p className="p-2 bg-[#e2eefc] rounded">{profile.email}</p>
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {[
+              { label: "Name", key: "name", placeholder: "Enter your name" },
+              { label: "Phone Number", key: "phone", placeholder: "+91 1234567890" },
+              { label: "Address", key: "address", placeholder: "Enter your address" },
+              { label: "Pincode", key: "pincode", placeholder: "Pincode" },
+            ].map(({ label, key, placeholder }) => (
+              <div key={key}>
+                <label className="block mb-1 text-sm font-semibold text-gray-700">{label}</label>
+                {editing ? (
+                  <input
+                    type="text"
+                    name={key}
+                    value={profile[key]}
+                    onChange={handleInputChange}
+                    className="w-full border border-[#087cfb] rounded-lg p-2 bg-[#e2eefc] hover:bg-white focus:bg-white transition"
+                    placeholder={placeholder}
+                  />
+                ) : (
+                  <p className="p-2 bg-[#e2eefc] rounded">{profile[key] || placeholder}</p>
+                )}
+              </div>
+            ))}
+
+            {/* Email (readonly) */}
+            <div className="sm:col-span-2">
+              <label className="block mb-1 text-sm font-semibold text-gray-700">Email</label>
+              <p className="p-2 bg-[#e2eefc] rounded cursor-not-allowed">{profile.email}</p>
             </div>
           </div>
         </div>
-  
-        <div className="flex justify-end mt-6">
+
+        <div className="flex justify-center sm:justify-end mt-4 sm:mt-6">
           {editing ? (
             <button
               onClick={handleSave}
@@ -174,7 +134,6 @@ const MyProfilePage = () => {
       </div>
     </div>
   );
-  
 };
 
 export default MyProfilePage;

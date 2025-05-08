@@ -42,7 +42,6 @@ const Hero = ({ businessList }) => {
     }
   }
 
-  // 👇 Handle click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -56,39 +55,43 @@ const Hero = ({ businessList }) => {
   }, [])
 
   return (
-    <div className='flex items-center flex-col justify-center pt-10 pb-7 gap-1'>
-      <h2 className='font-bold text-[46px] text-center'>
-        Hassle-Free Home <span className='text-[#087cfb]'>Services</span>
-        <br />
-        at Your Fingertips!
-      </h2>
-      <h2 className='text-xl text-gray-400'>
-        SmartFix connects you with verified experts to get the job done right.
-      </h2>
+    <section className="mt-5 w-full px-4 py-10 bg-white flex flex-col items-center justify-center text-center">
+      <div className="max-w-3xl">
+        <h1 className="text-3xl sm:text-5xl font-bold leading-tight mb-4">
+          Hassle-Free Home <span className="text-[#087cfb]">Services</span><br />
+          at Your Fingertips!
+        </h1>
+        <p className="text-gray-600 text-base sm:text-lg">
+          SmartFix connects you with verified experts to get the job done right.
+        </p>
+      </div>
 
-      <div className='mt-4 flex flex-col items-center gap-1 relative' ref={wrapperRef}>
-        <div className='flex gap-1 items-center'>
+      <div
+        ref={wrapperRef}
+        className="relative w-full max-w-md mt-8"
+      >
+        <div className="flex items-center bg-white rounded-full shadow-md px-3 py-1.5">
           <Input
             value={query}
             onChange={handleInputChange}
-            placeholder='Search'
-            className='border-b-4 border-[#087cfb] rounded-full md:w-[350px] focus:outline-none focus:ring-0 focus:border-[#087cfb]'
+            placeholder="Search for electricians, plumbers..."
+            className="flex-1 border-none focus:outline-none focus:ring-0 text-sm sm:text-base"
           />
           <Button
             onClick={handleSearchClick}
-            className='bg-[#087cfb] rounded-full h-[40px] cursor-pointer hover:bg-[#0462c9] transition-all'
+            className="bg-[#087cfb] hover:bg-[#0569d3] text-white rounded-full px-3 py-2 h-auto"
           >
-            <Search className='h-5 w-5' />
+            <Search className="w-4 h-4" />
           </Button>
         </div>
 
         {suggestions.length > 0 && (
-          <ul className='absolute top-[105%] z-10 bg-white w-full max-w-[350px] shadow-md rounded-lg overflow-hidden'>
+          <ul className="absolute top-[105%] z-20 w-full bg-white shadow-lg rounded-lg mt-2 overflow-hidden text-left text-sm sm:text-base">
             {suggestions.map((business) => (
               <li
                 key={business.id}
                 onClick={() => handleSelect(business)}
-                className='px-4 py-2 cursor-pointer hover:bg-gray-200'
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
               >
                 {business.name}
               </li>
@@ -96,7 +99,7 @@ const Hero = ({ businessList }) => {
           </ul>
         )}
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -56,12 +56,10 @@ function BookingSection({ children, business }) {
   const getTime = () => {
     const timeList = [];
     for (let i = 10; i <= 12; i++) {
-      timeList.push({ time: i + ':00 AM' });
-      timeList.push({ time: i + ':30 AM' });
+      timeList.push({ time: `${i}:00 AM` });
     }
-    for (let i = 1; i <= 6; i++) {
-      timeList.push({ time: i + ':00 PM' });
-      timeList.push({ time: i + ':30 PM' });
+    for (let i = 1; i <= 9; i++) {
+      timeList.push({ time: `${i}:00 PM` });
     }
     setTimeSlot(timeList);
   };
@@ -184,38 +182,39 @@ function BookingSection({ children, business }) {
         }}
       >
         <SheetTrigger asChild>{children}</SheetTrigger>
-        <SheetContent className="p-5 bg-white overflow-auto w-full sm:max-w-5xl">
+        <SheetContent className="p-5 bg-white overflow-auto w-full max-w-full sm:max-w-lg">
           {!showSummary ? (
             <>
               <SheetHeader>
-                <SheetTitle className="text-[#087cfb] text-2xl">Book a Service</SheetTitle>
-                <SheetDescription className="text-xl">
+                <SheetTitle className="text-[#087cfb] text-xl sm:text-2xl">Book a Service</SheetTitle>
+                <SheetDescription className="text-md sm:text-xl">
                   Select Date and Time slot to book a service
                 </SheetDescription>
               </SheetHeader>
 
-              <h2 className="font-bold text-[#087cfb]">Select Date</h2>
-              <div className="flex justify-center mt-5">
+              <h2 className="font-bold text-[#087cfb] mt-4">Select Date</h2>
+              <div className="flex justify-center mt-3">
                 <Calendar
                   mode="single"
                   selected={date}
                   onSelect={setDate}
                   defaultMonth={new Date()}
-                  className="rounded-md border p-3 scale-120"
+                  className="rounded-md border p-3 scale-100 sm:scale-110"
                 />
               </div>
 
               <h2 className="font-bold my-5 text-[#087cfb]">Select Time Slot</h2>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {timeSlot.map((item, index) => (
                   <Button
                     key={index}
                     disabled={isSlotBooked(item.time)}
                     variant="outline"
-                    className={`border-[#087cfb] rounded-full p-2 px-3 transition-all cursor-pointer ${selectedTime === item.time
+                    className={`border-[#087cfb] rounded-full p-2 text-sm sm:text-base transition-all cursor-pointer ${
+                      selectedTime === item.time
                         ? 'bg-[#087cfb] text-white'
                         : 'bg-white text-black'
-                      }`}
+                    }`}
                     onClick={() =>
                       setSelectedTime(
                         selectedTime === item.time ? null : item.time
@@ -227,23 +226,21 @@ function BookingSection({ children, business }) {
                 ))}
               </div>
 
-              <SheetFooter className="mt-5">
-                <div className="flex gap-5">
-                  <Button
-                    disabled={!(selectedTime && date)}
-                    className="hover:bg-[#0462c9] rounded-lg"
-                    onClick={() => setShowSummary(true)}
-                  >
-                    Proceed
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    className="rounded-lg"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Cancel
-                  </Button>
-                </div>
+              <SheetFooter className="mt-6 flex flex-col sm:flex-row gap-3">
+                <Button
+                  disabled={!(selectedTime && date)}
+                  className="hover:bg-[#0462c9] rounded-lg w-full"
+                  onClick={() => setShowSummary(true)}
+                >
+                  Proceed
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="rounded-lg w-full"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </Button>
               </SheetFooter>
             </>
           ) : (
@@ -308,7 +305,7 @@ function BookingSection({ children, business }) {
                 </div>
               </div>
 
-              <div className="mt-6 flex gap-4">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button
                   className="bg-[#087cfb] text-white hover:bg-[#0663d2] w-full"
                   onClick={handleRazorpayPayment}

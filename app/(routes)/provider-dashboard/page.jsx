@@ -143,32 +143,33 @@ export default function ProviderDashboard() {
   {/* Right side (Tabs) */}
   <div className="w-full mt-2 flex-grow">
   <Tabs defaultValue="bookings" className="flex flex-col h-full">
-  <TabsList className="flex gap-2 flex-wrap w-full">
-    <TabsTrigger 
-      value="bookings" 
-      className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
-    >
-      Bookings
-    </TabsTrigger>
-    <TabsTrigger 
-      value="map" 
-      className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
-    >
-      Society Map
-    </TabsTrigger>
-    <TabsTrigger 
-      value="reviews" 
-      className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
-    >
-      Reviews
-    </TabsTrigger>
-    <TabsTrigger 
-      value="earnings" 
-      className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
-    >
-      Earnings
-    </TabsTrigger>
-  </TabsList>
+    <TabsList className="flex gap-2 flex-wrap w-full overflow-x-auto scrollbar-hide">
+      <TabsTrigger 
+        value="bookings" 
+        className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
+      >
+        Bookings
+      </TabsTrigger>
+      <TabsTrigger 
+        value="map" 
+        className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
+      >
+        Society Map
+      </TabsTrigger>
+      <TabsTrigger 
+        value="reviews" 
+        className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
+      >
+        Reviews
+      </TabsTrigger>
+      <TabsTrigger 
+        value="earnings" 
+        className="text-gray-800 bg-white data-[state=active]:bg-[#e2eefc] data-[state=active]:text-white rounded-md text-lg py-3 px-6"
+      >
+        Earnings
+      </TabsTrigger>
+    </TabsList>
+
 
 
       {/* Bookings Tab */}
@@ -298,15 +299,15 @@ const BookingCard = ({ booking }) => {
   }, [booking.userEmail]);
 
   return (
-    <li className="bg-gray-100 p-6 rounded-lg shadow-sm">
-      <div className="space-y-1">
+    <li className="bg-white p-6 rounded-lg shadow-lg flex flex-col space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
+      <div className="flex flex-col sm:flex-grow space-y-2">
         <p><strong>Customer's Name:</strong> {booking.userName}</p>
         <p><strong>Customer's Email:</strong> {booking.userEmail}</p>
         <p><strong>Time:</strong> {booking.time}</p>
         <p><strong>Date:</strong> {booking.date}</p>
       </div>
       {customerProfile && (
-        <div className="mt-2 space-y-1">
+        <div className="sm:w-1/3 flex flex-col space-y-2">
           <p><strong>Phone No.:</strong> {customerProfile.phoneNumber}</p>
           <p><strong>Address:</strong> {customerProfile.address}</p>
         </div>

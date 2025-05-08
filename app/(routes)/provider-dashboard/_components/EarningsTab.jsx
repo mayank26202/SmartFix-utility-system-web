@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { BadgeCheck, IndianRupee } from "lucide-react";
 import { Bar } from 'react-chartjs-2';
@@ -101,7 +101,7 @@ export default function EarningsTab({ allBookings }) {
   };
 
   return (
-    <div className="p-6 space-y-6 w-full">
+    <div className="p-6 space-y-6 w-full max-w-4xl mx-auto">
       <h2 className="text-2xl font-semibold text-[#087cfb] flex items-center gap-2">
         <BadgeCheck className="w-6 h-6 text-[#087cfb]" />
         Earnings Overview
@@ -113,7 +113,6 @@ export default function EarningsTab({ allBookings }) {
             <span className="text-gray-700">
               {new Date(booking.date).toLocaleDateString('en-GB')} - {booking.time} {/* Format date as dd/mm/yyyy */}
             </span>
-            <span></span>
             <span className="text-green-600 font-semibold flex items-center gap-1">
               <IndianRupee className="w-4 h-4" />
               249
@@ -132,7 +131,9 @@ export default function EarningsTab({ allBookings }) {
 
       <div className="bg-white shadow-xl rounded-2xl p-6 mt-6 border border-gray-100 w-full">
         <h3 className="text-lg font-semibold text-[#262262]">Monthly Earnings Breakdown</h3>
-        <Bar data={data} options={options} />
+        <div className="w-full h-[300px]">
+          <Bar data={data} options={options} />
+        </div>
       </div>
 
       <p className="text-sm text-gray-500 text-center">*Based on ₹249 per completed booking</p>

@@ -30,7 +30,7 @@ function BusinessInfo({ business }) {
                         <Share2 />
                     </Button>
                     <h2 className='flex gap-2 text-lg text-[#087cfb] '><User />{business.contactPerson}</h2>
-                    <h2 className='flex gap-2 text-lg text-gray-500'><Clock />Available from 10:00 AM to 6:30 PM</h2>
+                    <h2 className='flex gap-2 text-lg text-gray-500'><Clock />Available from 10:00 AM to 9:00 PM</h2>
                 </div>
             </div>
         </div>
