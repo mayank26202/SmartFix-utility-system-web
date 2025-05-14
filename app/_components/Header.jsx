@@ -18,7 +18,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="p-4 md:px-8 shadow-md flex justify-between items-center bg-white z-50">
+    <header className="fixed top-0 left-0 right-0 p-4 md:px-8 shadow-[0_4px_12px_rgba(0,0,0,0.1)] border-b border-gray-200 flex justify-between items-center bg-white z-[100] backdrop-blur-lg">
       {/* Left: Logo + Nav */}
       <div className="flex items-center gap-10">
         {/* Logo and Brand */}
@@ -58,7 +58,7 @@ function Header() {
                   className="rounded-full border-2 border-[#087cfb] cursor-pointer"
                 />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="z-[200]">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuItem>
                   <Link href="/myProfile">My Profile</Link>
@@ -78,7 +78,7 @@ function Header() {
                   Login / Signup
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="z-[200]">
                 <DropdownMenuItem onClick={() => signIn('descope')}>Continue as User</DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/provider-auth">Continue as Provider</Link>

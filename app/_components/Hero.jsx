@@ -55,7 +55,7 @@ const Hero = ({ businessList }) => {
   }, [])
 
   return (
-    <section className="mt-5 w-full px-4 py-10 bg-white flex flex-col items-center justify-center text-center">
+    <section className="mt-15 w-full px-4 py-10 bg-white flex flex-col items-center justify-center text-center">
       <div className="max-w-3xl">
         <h1 className="text-3xl sm:text-5xl font-bold leading-tight mb-4">
           Hassle-Free Home <span className="text-[#087cfb]">Services</span><br />
@@ -70,18 +70,18 @@ const Hero = ({ businessList }) => {
         ref={wrapperRef}
         className="relative w-full max-w-md mt-8"
       >
-        <div className="flex items-center bg-white rounded-full shadow-md px-3 py-1.5">
+        <div className="flex items-center bg-white border border-[#d0d7e2] rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.25)] px-4 py-2 w-full max-w-xl transition-all duration-200">
           <Input
             value={query}
             onChange={handleInputChange}
             placeholder="Search for electricians, plumbers..."
-            className="flex-1 border-none focus:outline-none focus:ring-0 text-sm sm:text-base"
+            className="flex-1 bg-[#e2eefc] text-sm sm:text-base text-gray-800 placeholder-gray-400 border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#087cfb] rounded-full px-3 py-2 transition-all duration-200"
           />
           <Button
             onClick={handleSearchClick}
-            className="bg-[#087cfb] hover:bg-[#0569d3] text-white rounded-full px-3 py-2 h-auto"
+            className="ml-3 bg-[#087cfb] hover:bg-[#0569d3] text-white font-medium rounded-full px-4 py-2 h-auto shadow-md transition-all duration-200"
           >
-            <Search className="w-4 h-4" />
+            <Search className="w-5 h-5" />
           </Button>
         </div>
 

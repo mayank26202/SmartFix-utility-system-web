@@ -18,8 +18,8 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   // Hide header/footer for these paths
-  const hideHeaderFooter = pathname.startsWith('/admin') || pathname === '/provider-dashboard';
-
+  const hideHeaderFooter =
+    pathname.startsWith("/admin") || pathname === "/provider-dashboard";
 
   return (
     <html lang="en">
@@ -29,7 +29,11 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
         <link rel="icon" href={metadata.icons.icon} />
       </head>
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} ${
+          !hideHeaderFooter ? "" : ""
+        }`}
+      >
         <NextAuthSessionProvider>
           <div className="mx-6 md:mx-16">
             {!hideHeaderFooter && <Header />}
