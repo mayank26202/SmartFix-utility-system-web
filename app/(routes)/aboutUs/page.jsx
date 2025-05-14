@@ -4,7 +4,7 @@ import React from "react"
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#e2eefc] min-h-screen text-black">
+    <div className=" mt-20 bg-[#e2eefc] min-h-screen text-black">
 
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-4 py-20">

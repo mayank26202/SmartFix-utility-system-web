@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
 
   // Hide header/footer for these paths
   const hideHeaderFooter =
-    pathname.startsWith("/admin") || pathname === "/provider-dashboard";
+    pathname.startsWith("/admin") || pathname === "/provider-auth" || pathname === "/provider-dashboard";
 
   return (
     <html lang="en">

@@ -43,7 +43,7 @@ function BusinessDetail() {
     }
 
   return status=='authenticated'&&business&&(
-    <div className='py-8 md:py-20 px-5 md:px-36'>
+    <div className='mt-10 py-8 md:py-20 px-5 md:px-36'>
       <BusinessInfo business={business}/>
 
       <div className='grid grid-cols-1 md:grid-cols-3 mt-16 gap-10'>

@@ -21,11 +21,11 @@ export default function Footer() {
         {/* Quick Links */}
         <div>
           <h3 className="font-semibold text-xl mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-base">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/search/Cleaning">Services</Link></li>
-            <li><Link href="/aboutUs">About Us</Link></li>
-            <li><Link href="/support">Support</Link></li>
+          <ul className="space-y-2 text-base ">
+            <li><Link href="/" className="hover:text-[#087cfb]">Home</Link></li>
+            <li><Link href="/search/Cleaning" className="hover:text-[#087cfb]">Services</Link></li>
+            <li><Link href="/aboutUs" className="hover:text-[#087cfb]">About Us</Link></li>
+            <li><Link href="/support" className="hover:text-[#087cfb]">Support</Link></li>
           </ul>
         </div>
 
@@ -48,10 +48,10 @@ export default function Footer() {
             Phone: +91 XXXXX XXXXX
           </p>
           <div className="flex gap-5 text-2xl">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer"><FaFacebookF /></a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer"><FaInstagram /></a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer"><FaTwitter /></a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer"><FaLinkedinIn /></a>
+            <a href="https://facebook.com" className="hover:text-[#087cfb]" target="_blank" rel="noreferrer"><FaFacebookF /></a>
+            <a href="https://instagram.com" className="hover:text-[#087cfb]" target="_blank" rel="noreferrer"><FaInstagram /></a>
+            <a href="https://twitter.com" className="hover:text-[#087cfb]" target="_blank" rel="noreferrer"><FaTwitter /></a>
+            <a href="https://linkedin.com" className="hover:text-[#087cfb]" target="_blank" rel="noreferrer"><FaLinkedinIn /></a>
           </div>
         </div>
       </div>

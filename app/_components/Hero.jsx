@@ -91,7 +91,7 @@ const Hero = ({ businessList }) => {
               <li
                 key={business.id}
                 onClick={() => handleSelect(business)}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer hover:text-[#087cfb]"
               >
                 {business.name}
               </li>

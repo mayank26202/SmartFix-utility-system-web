@@ -5,12 +5,12 @@ function layout({ children }) {
   return (
     <div>
       {/* Category bar on mobile at top */}
-      <div className="block md:hidden mt-4">
+      <div className="block md:hidden mt-25">
         <CategorySideBar />
       </div>
 
       {/* Grid layout for desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 mt-25">
         <div className="hidden md:block">
           <CategorySideBar />
         </div>
