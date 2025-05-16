@@ -70,20 +70,21 @@ const Hero = ({ businessList }) => {
         ref={wrapperRef}
         className="relative w-full max-w-md mt-8"
       >
-        <div className="flex items-center bg-white border border-[#d0d7e2] rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.25)] px-4 py-2 w-full max-w-xl transition-all duration-200">
-          <Input
-            value={query}
-            onChange={handleInputChange}
-            placeholder="Search for electricians, plumbers..."
-            className="flex-1 bg-[#e2eefc] text-sm sm:text-base text-gray-800 placeholder-gray-400 border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#087cfb] rounded-full px-3 py-2 transition-all duration-200"
-          />
-          <Button
-            onClick={handleSearchClick}
-            className="ml-3 bg-[#087cfb] hover:bg-[#0569d3] text-white font-medium rounded-full px-4 py-2 h-auto shadow-md transition-all duration-200"
-          >
-            <Search className="w-5 h-5" />
-          </Button>
-        </div>
+<div className="flex items-center bg-gradient-to-r from-[#f0f4fa] to-[#eaf0f9] border border-[#c3d1e6] rounded-full shadow-lg px-4 py-2 w-full max-w-xl transition-all duration-300">
+  <Input
+    value={query}
+    onChange={handleInputChange}
+    placeholder="Search for electricians, plumbers..."
+    className="flex-1 bg-white text-sm sm:text-base text-gray-900 placeholder-gray-500 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#087cfb] transition-all duration-200"
+  />
+  <Button
+    onClick={handleSearchClick}
+    className="ml-3 bg-[#087cfb] hover:bg-[#0569d3] text-white font-semibold rounded-full px-5 py-2 shadow-md transition duration-200"
+  >
+    <Search className="w-5 h-5" />
+  </Button>
+</div>
+
 
         {suggestions.length > 0 && (
           <ul className="absolute top-[105%] z-20 w-full bg-white shadow-lg rounded-lg mt-2 overflow-hidden text-left text-sm sm:text-base">

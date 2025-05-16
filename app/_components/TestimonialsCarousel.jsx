@@ -35,26 +35,26 @@ const testimonials = [
 
 export default function TestimonialsCarousel() {
   return (
-    <div className="mt-10 bg-[#e2eefc] py-10 overflow-hidden relative">
-      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800">
+    <div className="mt-14 bg-[#e2eefc] py-14 px-4 sm:px-8">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
         What Our Clients Say
       </h2>
 
-      <div className="relative w-full h-[150px]">
-        <div className="absolute flex gap-6 animate-scroll w-max px-4">
+      <div className="overflow-x-auto scrollbar-hide">
+        <div className="flex gap-6 px-1 w-max animate-scroll">
           {[...testimonials, ...testimonials].map((item, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-xl p-4 sm:p-5 w-72 sm:w-80 flex-shrink-0"
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 w-72 sm:w-80 flex-shrink-0"
             >
-              <p className="text-gray-700 text-sm mb-4 break-words">
-                {item.text}
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                “{item.text}”
               </p>
               <div className="flex justify-between items-center">
-                <span className="font-semibold text-gray-900 text-sm">
+                <span className="text-sm font-medium text-gray-900">
                   {item.name}
                 </span>
-                <div className="flex items-center">
+                <div className="flex items-center gap-[2px]">
                   {Array.from({ length: item.rating }).map((_, i) => (
                     <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />
                   ))}
