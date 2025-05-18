@@ -332,6 +332,78 @@ const getReviews = async (businessId) => {
   return await request(MASTER_URL, query);
 };
 
+const createOrUpdateCategory = async (id, name, iconUrl, bgColor) => {
+  if (!name || !iconUrl || !bgColor) {
+    throw new Error('Name, icon URL, and background color are required.')
+  }
+
+  // Sanitize inputs (optional here, GraphQL variables help prevent injection)
+  const mutationQuery = gql`
+    mutation CreateOrUpdateCategory(
+      $id: ID
+      $name: String!
+      $iconUrl: String!
+      $bgColor: Hex!
+    ) {
+      ${
+        id
+          ? `
+      updateCategory(
+        where: { id: $id }
+        data: {
+          name: $name
+          icon: { update: { url: $iconUrl } }
+          bgcolor: { hex: $bgColor }
+        }
+      ) {
+        id
+      }
+      `
+          : `
+      createCategory(
+        data: {
+          name: $name
+          icon: { create: { url: $iconUrl } }
+          bgcolor: { hex: $bgColor }
+        }
+      ) {
+        id
+      }
+      `
+      }
+      publishManyCategories(to: PUBLISHED) {
+        count
+      }
+    }
+  `
+
+  const variables = {
+    id,
+    name,
+    iconUrl,
+    bgColor,
+  }
+
+  return await request(MASTER_URL, mutationQuery, variables)
+}
+
+
+
+const deleteCategory = async (id) => {
+  const mutationQuery = gql`
+    mutation DeleteCategory {
+      deleteCategory(where: { id: "${id}" }) {
+        id
+      }
+      publishManyCategories(to: PUBLISHED) {
+        count
+      }
+    }
+  `;
+  return await request(MASTER_URL, mutationQuery);
+};
+
+
 
 
 export default {
@@ -348,6 +420,8 @@ export default {
   getBussinesByEmail,
   createReview,
   getReviewsByBusiness,
-  getReviews
+  getReviews,
+  createOrUpdateCategory,
+  deleteCategory
 
 };

@@ -4,8 +4,8 @@ import React from 'react';
 
 function CategoryList({ categoryList }) {
   return (
-    <section className="bg-white py-1 px-4 md:px-10 lg:px-24">
-      <h2 className="text-2xl md:text-3xl font-semibold text-black mb-8 text-center">
+    <section className="bg-white px-4 md:px-10 lg:px-24">
+      <h2 className="text-2xl md:text-3xl font-semibold text-black mb-2 text-center">
         Explore Categories
       </h2>
 

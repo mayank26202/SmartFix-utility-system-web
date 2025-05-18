@@ -6,7 +6,7 @@ import React from 'react'
 function BusinessList({ businessList, title }) {
     return (
         <div className='mt-5 px-4 '>
-            <h2 className='font-bold text-[24px] md:text-[30px]'>{title}</h2>
+            <h2 className='font-bold text-[24px] md:text-[30px] text-center'>{title}</h2>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5 bg-white'>
                 {businessList.length > 0 ? businessList.map((business, index) => (
