@@ -86,6 +86,8 @@ const getBussinesById = async (id) => {
   return await request(MASTER_URL, query);
 };
 
+
+
 const getBussinesByEmail = async (email) => {
   const query = gql`
     query GetBusinessById {
@@ -403,6 +405,119 @@ const deleteCategory = async (id) => {
   return await request(MASTER_URL, mutationQuery);
 };
 
+const getBusinessById = (businessId) => {
+  const query = gql`
+    query GetBusinessById($id: ID!) {
+      businessList(where: { id: $id }) {
+        id
+        email
+        bookings {
+          id
+          bookingDate
+        }
+      }
+    }
+  `;
+  return request(MASTER_URL, query, { id: businessId });
+};
+
+const getBusinessByEmail = (email) => {
+  const query = gql`
+    query GetBusinessByEmail($email: String!) {
+      businessLists(where: { email: $email }) {
+        id
+        name
+        email
+        bookings {
+          id
+          bookingDate
+        }
+      }
+    }
+  `;
+  return request(MASTER_URL, query, { email });
+};
+
+
+
+export const getAllBusinessWithBookingCount = async () => {
+  const query = gql`
+    query GetAllBusinessBookingCounts {
+      businessLists {
+        id
+        name
+        category {
+          name
+        }
+        bookings {
+          id
+        }
+      }
+    }
+  `;
+  return await request(MASTER_URL, query);
+};
+
+export const getAllBookings = async () => {
+  const query = gql`
+    query GetAllBookings {
+      bookings(first: 1000) {
+        id
+        date
+        time
+        businessList {
+          id
+          name
+          category {
+            name
+          }
+        }
+      }
+    }
+  `;
+  return await request(MASTER_URL, query);
+};
+
+
+const getAllBookingsGroupedByCategory = async () => {
+  const query = gql`
+    query {
+      businessLists {
+        id
+        name
+        category {
+          name
+        }
+        bookings {
+          id
+        }
+      }
+    }
+  `;
+  return await request(MASTER_URL, query);
+};
+
+const getAllReviewsWithBusiness = async () => {
+  const query = gql`
+    query {
+      reviews(orderBy: createdAt_DESC, first: 1000) {
+        id
+        rating
+        reviewText
+        date
+        businessList {
+          id
+          name
+          category {
+            name
+          }
+        }
+      }
+    }
+  `;
+  const data = await request(MASTER_URL, query);
+  return data;
+};
 
 
 
@@ -422,6 +537,13 @@ export default {
   getReviewsByBusiness,
   getReviews,
   createOrUpdateCategory,
-  deleteCategory
+  deleteCategory,
+  getBusinessByCategory,
+  getBusinessByEmail,
+  getBusinessById,
+  getAllBusinessWithBookingCount,
+  getAllBookings,
+  getAllBookingsGroupedByCategory,
+  getAllReviewsWithBusiness
 
 };
